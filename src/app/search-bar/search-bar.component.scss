@@ -16,7 +16,7 @@ main {
 }
 
 li {
-  &:hover {
+  &.select {
     background: #006fe6;
   }
 }
