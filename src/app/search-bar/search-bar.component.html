@@ -1,23 +1,37 @@
 <div class="d-flex">
   <h3 class="icon-search m-3"></h3>
 
-  <input
-    autofocus
-    type="text"
-    class="w-100 input border-0"
-    placeholder="Search..."
-    [(ngModel)]="searchText"
-    (ngModelChange)="change($event)"
-  />
+  <div class="w-100 input border-0 position-relative d-flex align-items-center">
+    <div
+      #textField
+      class="w-100"
+      contenteditable
+      type="input"
+      autofocus
+      [(ngModel)]="searchText"
+      (ngModelChange)="change($event)"
+    ></div>
+    <div
+      *ngIf="previewSnippet; else placeholder"
+      class="placeholder position-absolute"
+    >
+      {{ previewSnippet.key }}
+    </div>
+    <ng-template #placeholder>
+      <div *ngIf="!searchText" class="placeholder position-absolute">
+        Search snippet for auto typing
+      </div>
+    </ng-template>
+  </div>
 
   <!-- <h3 class="icon-cog m-3"></h3> -->
 </div>
 <main #main>
-  <ul *ngIf="searchResult.length > 0" class="pb-3" >
+  <ul *ngIf="searchResult.length > 0" class="pb-3">
     <li
       #item
       *ngFor="let snippet of searchResult; let i = index"
-      class="p-2 item"
+      class="p-1 item"
       [ngClass]="{ select: selectIndex === i }"
       (click)="choice(snippet)"
       (mouseenter)="hover(i)"

@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'st-search-detail',
   templateUrl: './search-detail.component.html',
-  styleUrls: ['./search-detail.component.scss']
+  styleUrls: ['./search-detail.component.scss'],
 })
 export class SearchDetailComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

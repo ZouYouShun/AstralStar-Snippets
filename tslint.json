@@ -17,13 +17,13 @@
     "contextual-lifecycle": true,
     "directive-class-suffix": true,
     "directive-selector": [
-      true,
+      false,
       "attribute",
       "st",
       "camelCase"
     ],
     "component-selector": [
-      true,
+      false,
       "element",
       "st",
       "kebab-case"

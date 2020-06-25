@@ -5,14 +5,21 @@ $font-color: #acaeae;
 }
 
 .input {
-  background: transparent;
-  outline: none;
-  font-size: 36px;
+  font-size: 24px;
   color: $font-color;
+  white-space: nowrap;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.placeholder {
+  color: rgba($font-color, 0.42);
+  pointer-events: none;
 }
 
 main {
   border-color: $font-color;
+  // max-height: 400px;
 }
 
 li {
