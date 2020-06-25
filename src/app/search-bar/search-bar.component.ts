@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ElectronService } from '../core';
 
 interface Snippet {
   key: string;
@@ -16,7 +17,7 @@ export class SearchBarComponent implements OnInit {
   snippets: Snippet[] = [
     {
       key: 'ga',
-      value: 'ga',
+      value: 'ga732423alan!!!202004',
     },
     {
       key: 'ga1',
@@ -38,7 +39,7 @@ export class SearchBarComponent implements OnInit {
 
   searchResult = [];
 
-  constructor() {}
+  constructor(private electronService: ElectronService) {}
 
   ngOnInit(): void {}
 
@@ -53,6 +54,6 @@ export class SearchBarComponent implements OnInit {
   }
 
   choice(snippet: Snippet): void {
-    console.log(snippet);
+    this.electronService.ipcRenderer.send('message', snippet);
   }
 }

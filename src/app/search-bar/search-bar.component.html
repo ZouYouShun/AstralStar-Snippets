@@ -2,6 +2,7 @@
   <h3 class="icon-search m-3"></h3>
 
   <input
+    autofocus
     type="text"
     class="w-100 input border-0"
     placeholder="Search..."
@@ -13,7 +14,11 @@
 </div>
 <main *ngIf="searchResult.length > 0" class="border-top p-3">
   <ul>
-    <li *ngFor="let snippet of searchResult" class="p-2 item" (click)="choice(snippet)">
+    <li
+      *ngFor="let snippet of searchResult"
+      class="p-2 item"
+      (click)="choice(snippet)"
+    >
       {{ snippet.key }}
     </li>
   </ul>
