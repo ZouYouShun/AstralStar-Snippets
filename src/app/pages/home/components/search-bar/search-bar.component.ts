@@ -8,7 +8,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 
-import { ElectronService, getCursorPosition, setCursor } from '../core';
+import { ElectronService, getCursorPosition, setCursor } from '../../../../core';
 
 interface Snippet {
   key: string;

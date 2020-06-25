@@ -1,20 +1,13 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ContenteditableDirective } from './core/directives/contenteditable.directive';
-import { SearchBarComponent } from './search-bar/search-bar.component';
-import { SearchDetailComponent } from './search-detail/search-detail.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SearchBarComponent,
-    SearchDetailComponent,
-    ContenteditableDirective,
-  ],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule],
+  declarations: [AppComponent],
+  imports: [BrowserModule, SharedModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })
