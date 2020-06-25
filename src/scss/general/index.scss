@@ -1,7 +1,6 @@
-@import '~scss/_my-theme.variable.scss';
+@import '../_my-theme.variable.scss';
 @import './_addStyle.scss';
 @import './_align.scss';
-@import './_color.scss';
 @import './_display.scss';
 @import './_flex.scss';
 @import './_padding.scss';
@@ -50,8 +49,6 @@
   background-color: black;
 }
 
-@include add-color('c', 'color', $app-color);
-@include add-color('bg', 'background-color', $app-color);
 @include add-style('fs', font-size, $app-font-size);
 @include add-style('br', border-radius, $app-border-radius);
 // @include add-scrollbar(app-color(grey, 0.5), app-color(grey, 0.8));

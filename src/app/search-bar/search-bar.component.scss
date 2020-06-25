@@ -1,3 +1,22 @@
+$font-color: #acaeae;
+
 :host {
-  color: #acaeae;
+  color: $font-color;
+}
+
+.input {
+  background: transparent;
+  outline: none;
+  font-size: 36px;
+  color: $font-color;
+}
+
+main {
+  border-color: $font-color;
+}
+
+li {
+  &:hover {
+    background: #006fe6;
+  }
 }

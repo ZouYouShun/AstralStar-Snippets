@@ -1,4 +1,4 @@
-@import '~scss/_my-theme.variable.scss';
+@import '../_my-theme.variable.scss';
 @mixin add-scrollbar($bg, $bar) {
   // main bar container
   ::-webkit-scrollbar {
@@ -8,6 +8,5 @@
   ::-webkit-scrollbar-thumb {
     border-radius: app-border-radius(square-more);
     background-color: $bar;
-    @include mat-elevation(2); // background-color: $bar;
   }
 }

@@ -1,5 +1,26 @@
+@import "./scss/normalize.scss";
 @import "./scss/_my-boostrap.theme";
+@import "./assets/icons/style.css";
 
+html,
 body {
-  background: #272822;
+  height: 100%;
+  background: rgba(39, 40, 34, 0.7);
+}
+
+* {
+  outline: none !important;
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    list-style: none;
+    display: block;
+  }
 }
