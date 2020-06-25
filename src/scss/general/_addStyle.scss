@@ -1,0 +1,22 @@
+@mixin add-style($alise, $type, $array) {
+  $list: ();
+  @each $property,
+  $value in $array {
+    // group then same value
+    $index: index($list, $value);
+    // if get the index, use extend otherwise add new class
+    @if type-of($index)==number {
+      $prevProperty: nth(nth($array, $index), 1);
+      .#{$alise}-#{$property} {
+        @extend .#{$alise}-#{$prevProperty};
+      }
+    }
+    @else {
+      .#{$alise}-#{$property} {
+        #{$type}: $value !important;
+      }
+    }
+    // add to new array
+    $list:append($list, $value);
+  }
+}

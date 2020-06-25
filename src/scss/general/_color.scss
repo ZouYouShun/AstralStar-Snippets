@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+@mixin add-color($alise, $type, $color) {
+  @each $property,
+  $value in $color {
+    .#{$alise}-#{$property} {
+      #{$type}: mat-color($value);
+    }
+  }
+}

@@ -1,0 +1,4 @@
+// https://stackoverflow.com/questions/2570972/css-font-border
+@mixin font-border($width, $color) {
+  text-shadow: -#{$width} 0 $color, 0 #{$width} $color, #{$width} 0 $color, 0 -#{$width} $color;
+}

@@ -1,0 +1,107 @@
+@import '~@angular/material/theming';
+@import './_mat-icon-align.scss';
+@import './_theme-color.scss';
+
+// light
+$app-light-primary: mat-palette($mat-orange, 400);
+$app-light-accent:mat-palette($mat-light-blue, 400);
+$app-light-warn:mat-palette($mat-red, 500);
+$app-light-theme:mat-light-theme($app-light-primary, $app-light-accent, $app-light-warn);
+
+// dark
+$app-dark-primary: mat-palette($mat-cyan, 900);
+$app-dark-accent:mat-palette($mat-deep-orange, 900);
+$app-dark-warn:mat-palette($mat-red, 500);
+$app-dark-theme:mat-dark-theme($app-dark-primary, $app-dark-accent, $app-dark-warn);
+
+$app-main-color: mat-palette($mat-deep-orange, 800);
+
+$app-typgography: mat-typography-config(
+  $font-family:'"Microsoft JhengHei", sans-serif',
+  $display-4:     mat-typography-level(112px, 112px, 300),
+  $display-3:     mat-typography-level(56px, 56px, 400),
+  $display-2:     mat-typography-level(45px, 48px, 400),
+  $display-1:     mat-typography-level(34px, 40px, 400),
+  $headline:      mat-typography-level(24px, 32px, 800),
+  $title:         mat-typography-level(24px, 32px, 700),
+  $subheading-2:  mat-typography-level(16px, 28px, 400),
+  $subheading-1:  mat-typography-level(12px, 24px, 400),
+  $body-2:        mat-typography-level(20px, 24px, 500),
+  $body-1:        mat-typography-level(14px, 20px, 400),
+  $caption:       mat-typography-level(16px, 25px, 400),
+  $button:        mat-typography-level(18px, 18px, 500),
+  // Line-height must be unit-less fraction of the font-size.
+  $input:         mat-typography-level(20px, 1.125, 400));
+
+@mixin my-material-theme($theme) {
+  // font
+  @include mat-core-theme($theme);
+
+  // component
+  @include mat-button-theme($theme);
+  // @include mat-card-theme($theme);
+  @include mat-list-theme($theme);
+  @include mat-sidenav-theme($theme);
+  @include mat-toolbar-theme($theme);
+  @include mat-progress-spinner-theme($theme);
+  @include mat-form-field-theme($theme);
+  @include mat-menu-theme($theme);
+  @include mat-input-theme($theme);
+  @include mat-select-theme($theme);
+  // @include mat-autocomplete-theme($theme);
+  // @include mat-button-toggle-theme($theme);
+  @include mat-checkbox-theme($theme);
+  // @include mat-chips-theme($theme);
+  // @include mat-table-theme($theme);
+  @include mat-datepicker-theme($theme);
+  // @include mat-dialog-theme($theme);
+  // @include mat-expansion-panel-theme($theme);
+  // @include mat-grid-list-theme($theme);
+  @include mat-icon-theme($theme);
+  // @include mat-paginator-theme($theme);
+  // @include mat-progress-bar-theme($theme);
+  @include mat-radio-theme($theme);
+  @include mat-slide-toggle-theme($theme);
+  // @include mat-slider-theme($theme);
+  // @include mat-stepper-theme($theme);
+  // @include mat-tabs-theme($theme);
+  // @include mat-tooltip-theme($theme);
+  // @include mat-tree-theme($theme);
+  @include mat-snack-bar-theme($theme);
+}
+
+@mixin add-material-theme() {
+    /*
+    this name is so long, is because this variable will global to the scss, must be unique,
+    otherwise it will cause duplicate problem
+    */
+    $now_add_material_theme: $app-light-theme !global;
+
+    [light] {
+      @content;
+    }
+
+    $now_add_material_theme: $app-dark-theme !global;
+
+    [dark] {
+      @content;
+    }
+
+}
+
+
+@mixin add-theme($type) {
+
+    @if $type=='light' {
+      $now_add_material_theme: $app-light-theme !global;
+    }
+
+    @else if $type=='dark' {
+      $now_add_material_theme: $app-dark-theme !global;
+    }
+
+    [#{$type}] {
+      @content;
+    }
+
+}

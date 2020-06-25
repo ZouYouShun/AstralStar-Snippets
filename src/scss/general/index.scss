@@ -1,0 +1,57 @@
+@import '~scss/_my-theme.variable.scss';
+@import './_addStyle.scss';
+@import './_align.scss';
+@import './_color.scss';
+@import './_display.scss';
+@import './_flex.scss';
+@import './_padding.scss';
+@import './_margin.scss';
+@import './_scrollbar.scss';
+@include add-padding(3, 16, 't-b');
+@include add-padding(3, 16, 'l-r');
+@include add-padding(3, 16, 'l');
+@include add-padding(3, 16, 'r');
+@include add-padding(3, 16, 't');
+@include add-padding(3, 16, 'b');
+@include add-padding(3, 16);
+@include add-margin(3, 16, 't-b');
+@include add-margin(3, 16, 'l-r');
+@include add-margin(3, 16, 'l');
+@include add-margin(3, 16, 'r');
+@include add-margin(3, 16, 't');
+@include add-margin(3, 16, 'b');
+@include add-margin(3, 16);
+.mar-0 {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+.pad-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.c-white {
+  color: white;
+}
+
+.c-black {
+  color: black;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.bg-black {
+  background-color: black;
+}
+
+@include add-color('c', 'color', $app-color);
+@include add-color('bg', 'background-color', $app-color);
+@include add-style('fs', font-size, $app-font-size);
+@include add-style('br', border-radius, $app-border-radius);
+// @include add-scrollbar(app-color(grey, 0.5), app-color(grey, 0.8));

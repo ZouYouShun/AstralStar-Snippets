@@ -1,0 +1,13 @@
+@import '~@angular/material/theming';
+
+$app-font-weight:(
+  small: 12px,
+  nomal: 16px,
+  bigger: 24px,
+  large: 36px,
+  huge: 72px
+);
+
+@function  app-font-weight($type){
+  @return map-get($app-font-size, $type);
+}

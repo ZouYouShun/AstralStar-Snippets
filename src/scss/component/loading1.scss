@@ -1,0 +1,57 @@
+@import '~scss/_my-theme.variable.scss';
+
+$delay: 0.1;
+$totalNum: 7;
+$halfNum:ceil($totalNum / 2);
+$time: $delay * ($totalNum+$halfNum);
+$colors:
+green,
+yellow,
+orange,
+red,
+#00beff,
+blue,
+purple;
+
+.loader-wrap {
+  display: flex;
+  pointer-events: all;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.line {
+  display: inline-block;
+  width: 10px;
+  height: 15px;
+  margin: 3px;
+  border-radius: 15px;
+}
+
+.load-1 {
+  display: flex;
+  align-items: center;
+  .line {
+    @for $i from 1 through $totalNum {
+      &:nth-child(#{$i}) {
+        animation: loadingA #{$time}s #{$delay * abs($halfNum - $i)}s infinite;
+        background: lighten(nth($colors, $i), 20%);
+      }
+    }
+  }
+}
+
+@keyframes loadingA {
+  0% {
+    height: 15px;
+  }
+  50% {
+    height: 50px;
+  }
+  100% {
+    height: 15px;
+  }
+}

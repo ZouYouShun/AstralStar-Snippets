@@ -1,0 +1,24 @@
+@import '~scss/_my-theme.variable.scss';
+
+.load-4 .ring-1 {
+  animation: loadingD 1.5s cubic-bezier(.17, .37, .43, .67) infinite;
+}
+
+.ring-1 {
+  padding: 35px;
+  border: 10px inset #ffa726;
+  border-radius: 50%;
+  background: white;
+}
+
+@keyframes loadingD {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

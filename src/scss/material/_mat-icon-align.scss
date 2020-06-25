@@ -1,0 +1,10 @@
+@mixin mat-icon-align($num:3) {
+  @for $i from 1 through $num {
+    .mat-size-#{$i} {
+      font-size: #{$i}rem;
+      width: inherit;
+      height: #{$i + .2}rem;
+      vertical-align: middle;
+    }
+  }
+}

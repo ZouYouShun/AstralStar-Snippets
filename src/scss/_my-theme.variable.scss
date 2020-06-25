@@ -1,0 +1,29 @@
+// Define theme
+@import './material/_my-material.theme.scss';
+@import './function/_index.scss';
+@import './animation/_shiny.scss';
+@import './font/font-border.scss';
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+$app-menu-height:120px;
+$rate:0.6;
+
+$box-zIndex:20;
+$active-color:#ffa748;
+$app-border-color:#aeaeae;
+
+@mixin flex_width($width) {
+  flex: 1 1 $width;
+
+  @if $width !=auto {
+    max-width: $width;
+    min-width: $width;
+  }
+  @else {
+    max-width: initial;
+    min-width: initial;
+  }
+}
