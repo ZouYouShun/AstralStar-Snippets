@@ -8,12 +8,13 @@ import {
   ViewChildren,
 } from '@angular/core';
 
-import { ElectronService, getCursorPosition, setCursor } from '../../../../core';
-
-interface Snippet {
-  key: string;
-  value: string;
-}
+import {
+  ElectronService,
+  SnippetsService,
+  getCursorPosition,
+  setCursor,
+  SnippetModel,
+} from '../../../../core';
 
 enum IpcEventType {
   MESSAGE = 'MESSAGE',
@@ -39,36 +40,16 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
 
   selectIndex = 0;
 
-  get previewSnippet(): Snippet {
+  get previewSnippet(): SnippetModel {
     return this.searchResult[this.selectIndex];
   }
 
-  snippets: Snippet[] = [
-    {
-      key: 'ga',
-      value: 'ga732423alan!!!202004',
-    },
-    {
-      key: 'ga1',
-      value: 'ga',
-    },
-    {
-      key: 'ga2',
-      value: 'ga',
-    },
-    {
-      key: 'ga3',
-      value: 'ga',
-    },
-    {
-      key: 'ga4',
-      value: 'ga',
-    },
-  ];
+  searchResult: SnippetModel[] = [];
 
-  searchResult: Snippet[] = [];
-
-  constructor(private electronService: ElectronService) {}
+  constructor(
+    private electron: ElectronService,
+    private snippets: SnippetsService
+  ) {}
 
   ngOnInit(): void {
     window.addEventListener(
@@ -116,7 +97,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
               this.searchResult.length === 0 &&
               this.selectIndex === 0
             ) {
-              this.searchResult = this.snippets;
+              this.searchResult = this.snippets.snippets;
               return;
             }
 
@@ -152,7 +133,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   change(value: string): void {
     this.searchResult =
       value !== ''
-        ? this.snippets.filter(
+        ? this.snippets.snippets.filter(
             (snippet) => snippet.key.slice(0, value.length) === value
           )
         : [];
@@ -161,7 +142,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     this.selectIndex = 0;
   }
 
-  choice(snippet: Snippet): void {
+  choice(snippet: SnippetModel): void {
     this._sendIpc(IpcEventType.MESSAGE, snippet);
   }
 
@@ -171,6 +152,6 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   }
 
   private _sendIpc(snippet: IpcEventType, value: any): void {
-    this.electronService.ipcRenderer.send(snippet, value);
+    this.electron.ipcRenderer.send(snippet, value);
   }
 }

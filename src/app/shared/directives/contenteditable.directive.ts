@@ -27,6 +27,26 @@ export class ContenteditableDirective
   @Input() propValueAccessor = 'textContent';
   @Input() autofocus = false;
 
+  @Input()
+  get contenteditable() {
+    return this._contenteditable;
+  }
+  set contenteditable(value) {
+    if (value !== false) {
+      this.renderer.addClass(this.elementRef.nativeElement, this.editableClass);
+    } else {
+      this.renderer.removeClass(
+        this.elementRef.nativeElement,
+        this.editableClass
+      );
+    }
+    this._contenteditable = value;
+  }
+
+  @Input() editableClass = 'editable';
+  @Input() focusClass = 'focus';
+
+  private _contenteditable = false;
   private onChange: (value: string) => void;
   private onTouched: () => void;
   private removeDisabledState: () => void;
@@ -80,11 +100,17 @@ export class ContenteditableDirective
     }
   }
 
+  @HostListener('focus')
+  callOnFocus(): void {
+    this.renderer.addClass(this.elementRef.nativeElement, this.focusClass);
+  }
+
   @HostListener('blur')
   callOnTouched(): void {
     if (typeof this.onTouched === 'function') {
       this.onTouched();
     }
+    this.renderer.removeClass(this.elementRef.nativeElement, this.focusClass);
   }
 
   /**

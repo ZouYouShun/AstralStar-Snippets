@@ -24,3 +24,15 @@ ol {
     display: block;
   }
 }
+
+.transition {
+  transition: all .195s cubic-bezier(0.4, 0.0, 1, 1);
+}
+
+.transition-long {
+  transition: all .295s cubic-bezier(0.4, 0.0, 1, 1);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

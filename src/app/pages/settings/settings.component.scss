@@ -1,0 +1,35 @@
+$font-color: #acaeae;
+st-settings {
+  color: $font-color;
+
+  .link {
+    color: $font-color;
+  }
+
+  .active {
+    background-color: #acaeae;
+    color: rgb(39, 40, 34);
+  }
+
+  nav {
+    background: rgb(39, 40, 34, 0.5);
+  }
+
+  .item {
+    .editable {
+      &.focus,
+      &:hover {
+        background: white;
+        color: black;
+      }
+    }
+  }
+
+  .item:nth-child(odd) {
+    @extend .active;
+    background-color: rgba(#acaeae, 0.5);
+    // &:hover {
+    //   border-width: 2px !important;
+    // }
+  }
+}
