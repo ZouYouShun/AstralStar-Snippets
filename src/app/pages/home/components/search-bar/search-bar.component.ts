@@ -43,7 +43,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _electron: ElectronService,
-    private snippets: SnippetsService
+    private _snippets: SnippetsService
   ) {}
 
   ngOnInit(): void {
@@ -92,7 +92,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
               this.searchResult.length === 0 &&
               this.selectIndex === 0
             ) {
-              this.searchResult = this.snippets.snippets;
+              this.searchResult = this._snippets.snippets;
               return;
             }
 
@@ -128,7 +128,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   change(value: string): void {
     this.searchResult =
       value !== ''
-        ? this.snippets.snippets.filter(
+        ? this._snippets.snippets.filter(
             (snippet) => snippet.key.slice(0, value.length) === value
           )
         : [];
@@ -138,7 +138,17 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   }
 
   choice(snippet: SnippetModel): void {
-    this._sendIpc(IpcEventType.MESSAGE, snippet);
+    const { applyTextDirectly, copyToKeyboard } = this._snippets;
+
+    const message =
+      [
+        applyTextDirectly && IpcEventType.APPLY,
+        copyToKeyboard && IpcEventType.COPY,
+      ]
+        .filter((x) => !!x)
+        .join('_') || IpcEventType.COPY;
+
+    this._sendIpc(message, snippet);
   }
 
   hover(i: number): void {
@@ -146,7 +156,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     this.selectIndex = i;
   }
 
-  private _sendIpc(snippet: IpcEventType, value: any): void {
+  private _sendIpc(snippet: string, value: any): void {
     this._electron.ipcRenderer.send(snippet, value);
   }
 }

@@ -18,18 +18,10 @@ export class SettingAccountComponent implements OnInit {
     return this._snippets.applyTextDirectly;
   }
   set applyTextDirectly(v: string) {
-    console.log('123');
     this._snippets.applyTextDirectly = v;
   }
 
-  constructor(public _snippets: SnippetsService) {
-    setInterval(() => {
-      console.log(
-        this._snippets.applyTextDirectly,
-        this._snippets.copyToKeyboard
-      );
-    }, 1000);
-  }
+  constructor(public _snippets: SnippetsService) {}
 
   ngOnInit(): void {}
 }

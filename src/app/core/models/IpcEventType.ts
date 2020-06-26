@@ -1,5 +1,7 @@
 export enum IpcEventType {
-  MESSAGE = 'MESSAGE',
+  COPY = 'COPY',
+  APPLY = 'APPLY',
+  APPLY_COPY = 'APPLY_COPY',
   HEIGHT = 'HEIGHT',
   EXIT = 'EXIT'
 }
