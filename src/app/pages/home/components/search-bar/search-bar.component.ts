@@ -15,7 +15,6 @@ import {
   SnippetModel,
   SnippetsService,
 } from '../../../../core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'st-search-bar',
@@ -43,7 +42,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
 
   searchResult: SnippetModel[] = [];
 
-  constructor(private _snippets: SnippetsService, private _router: Router) {}
+  constructor(private _snippets: SnippetsService) {}
 
   ngOnInit(): void {
     window.addEventListener(
@@ -149,9 +148,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   }
 
   goSettings() {
-    this._router.navigateByUrl('/settings');
-
-    // this._snippets.sendIpcSync(IpcEventType.GO_SETTINGS);
+    this._snippets.sendIpcSync(IpcEventType.GO_SETTINGS);
   }
 
   private _setCurrentHeight(): void {

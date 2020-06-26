@@ -6,4 +6,5 @@ export enum IpcEventType {
   EXIT = 'EXIT',
   PREVIOUS_SNIPPET = 'PREVIOUS_SNIPPET',
   GO_SETTINGS = 'GO_SETTINGS',
+  INIT_ROUTE = 'INIT_ROUTE',
 }

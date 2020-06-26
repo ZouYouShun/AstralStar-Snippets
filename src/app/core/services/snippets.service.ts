@@ -54,7 +54,7 @@ export class SnippetsService {
     private _electron: ElectronService
   ) {
     const latestSnippet = this.sendIpcSync(IpcEventType.PREVIOUS_SNIPPET);
-    console.log(latestSnippet);
+
     this.previousSnippet = this.snippets.find(
       (snippet) => snippet.value === latestSnippet
     );
