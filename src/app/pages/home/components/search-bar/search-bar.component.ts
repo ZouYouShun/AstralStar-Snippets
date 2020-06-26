@@ -10,17 +10,12 @@ import {
 
 import {
   ElectronService,
-  SnippetsService,
   getCursorPosition,
+  IpcEventType,
   setCursor,
   SnippetModel,
+  SnippetsService,
 } from '../../../../core';
-
-enum IpcEventType {
-  MESSAGE = 'MESSAGE',
-  HEIGHT = 'HEIGHT',
-  EXIT = 'EXIT',
-}
 
 @Component({
   selector: 'st-search-bar',
@@ -47,7 +42,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   searchResult: SnippetModel[] = [];
 
   constructor(
-    private electron: ElectronService,
+    private _electron: ElectronService,
     private snippets: SnippetsService
   ) {}
 
@@ -152,6 +147,6 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   }
 
   private _sendIpc(snippet: IpcEventType, value: any): void {
-    this.electron.ipcRenderer.send(snippet, value);
+    this._electron.ipcRenderer.send(snippet, value);
   }
 }

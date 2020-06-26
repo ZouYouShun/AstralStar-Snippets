@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ContenteditableDirective } from './directives';
+import { BeforeunloadModule } from './modules';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
@@ -10,6 +11,7 @@ import { ContenteditableDirective } from './directives';
   exports: [
     CommonModule,
     FormsModule,
+    BeforeunloadModule,
     ReactiveFormsModule,
     ContenteditableDirective,
   ],

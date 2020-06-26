@@ -37,4 +37,8 @@ export class SnippetsService {
       value: '',
     });
   }
+
+  save(value: SnippetModel[]) {
+    this.snippets = value;
+  }
 }

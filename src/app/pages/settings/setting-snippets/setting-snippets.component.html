@@ -1,52 +1,67 @@
+<ng-container *ngIf="formChange$ | async"></ng-container>
+
 <header class="pb-2 pl-3 d-flex align-items-center">
   <h3>Snippets</h3>
   <i class="flex-fill"></i>
   <span
-    class="icon-eye mr-4 cursor-pointer"
-    [ngClass]="{ 'icon-eye-blocked': !isPreview }"
-    (click)="togglePreview()"
+    *ngIf="!isEdit; else editControlElm"
+    class="icon-cog mr-4 cursor-pointer"
+    (click)="toggleIsEdit()"
   ></span>
-  <span class="icon-plus mr-4 cursor-pointer" (click)="add()"></span>
+  <ng-template #editControlElm>
+    <span class="icon-plus mr-4 cursor-pointer" (click)="add()"></span>
+    <span class="icon-checkmark mr-4 cursor-pointer" (click)="save()"></span>
+    <span class="icon-cross mr-4 cursor-pointer" (click)="cancel()"></span>
+  </ng-template>
 </header>
 
-<ul class="mx-3">
-  <li class="mb-1">
-    <div class="p-2 d-flex w-100 active">
-      <span class="d-block w-25">
-        Title
-      </span>
-      <span>
-        Content
-      </span>
-    </div>
-  </li>
-  <li
-    *ngFor="let snippet of snippets; let i = index"
-    class="item mb-1"
-    (click)="edit(i)"
-  >
-    <div class="d-flex w-100">
-      <ng-container *ngIf="snippet && !isPreview; else editElm">
-        <span class="d-block w-25 p-2">
-          {{ snippet.key }}
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="save()"
+  [beforeunload]="beforeunload"
+  [exit]="exit"
+>
+  <ul class="mx-3">
+    <li class="mb-1">
+      <div class="p-2 d-flex w-100 active">
+        <span class="d-block w-25">
+          Title
         </span>
-        <span class="p-2">
-          ******************************************
+        <span>
+          Content
         </span>
-        <i class="flex-fill"></i>
-        <span
-          class="icon-cancel-circle cursor-pointer"
-          (click)="remove(i)"
-        ></span>
-      </ng-container>
-      <ng-template #editElm>
-        <span class="d-block w-25 p-2" contenteditable>
-          {{ snippet.key }}
-        </span>
-        <span class="w-75 p-2" contenteditable>
-          {{ snippet.value }}
-        </span>
-      </ng-template>
-    </div>
-  </li>
-</ul>
+      </div>
+    </li>
+    <ng-container formArrayName="snippets">
+      <li
+        *ngFor="let snippet of snippets.controls; let i = index"
+        class="item mb-1"
+      >
+        <div class="d-flex w-100 align-items-center" [formGroupName]="i">
+          <ng-container *ngIf="!isEdit; else editElm">
+            <span class="d-block w-25 p-2">
+              {{ snippet.get('key').value }}
+            </span>
+            <span class="p-2">
+              ******************************************
+            </span>
+          </ng-container>
+          <ng-template #editElm>
+            <span
+              class="d-block w-25 p-2"
+              contenteditable
+              formControlName="key"
+            >
+            </span>
+            <span class="flex-fill p-2" contenteditable formControlName="value">
+            </span>
+            <span
+              class="icon-cancel-circle cursor-pointer m-2"
+              (click)="remove(i)"
+            ></span>
+          </ng-template>
+        </div>
+      </li>
+    </ng-container>
+  </ul>
+</form>
