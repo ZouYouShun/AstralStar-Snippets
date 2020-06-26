@@ -15,6 +15,7 @@ import {
   SnippetModel,
   SnippetsService,
 } from '../../../../core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'st-search-bar',
@@ -42,7 +43,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
 
   searchResult: SnippetModel[] = [];
 
-  constructor(private _snippets: SnippetsService) {}
+  constructor(private _snippets: SnippetsService, private _router: Router) {}
 
   ngOnInit(): void {
     window.addEventListener(
@@ -110,12 +111,6 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     );
   }
 
-  private _setCurrentHeight(): void {
-    console.log(IpcEventType.HEIGHT);
-    this.currentHeight = this.mainElm.nativeElement.clientHeight;
-    this._snippets.sendIpc(IpcEventType.HEIGHT, this.currentHeight);
-  }
-
   ngAfterViewInit(): void {
     this.items.changes.subscribe((x) => {
       this._setCurrentHeight();
@@ -151,5 +146,16 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   hover(i: number): void {
     console.log(i);
     this.selectIndex = i;
+  }
+
+  goSettings() {
+    this._router.navigateByUrl('/settings');
+
+    // this._snippets.sendIpcSync(IpcEventType.GO_SETTINGS);
+  }
+
+  private _setCurrentHeight(): void {
+    this.currentHeight = this.mainElm.nativeElement.clientHeight;
+    this._snippets.sendIpc(IpcEventType.HEIGHT, this.currentHeight);
   }
 }

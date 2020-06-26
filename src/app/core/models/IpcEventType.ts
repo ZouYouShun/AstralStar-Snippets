@@ -5,4 +5,5 @@ export enum IpcEventType {
   HEIGHT = 'HEIGHT',
   EXIT = 'EXIT',
   PREVIOUS_SNIPPET = 'PREVIOUS_SNIPPET',
+  GO_SETTINGS = 'GO_SETTINGS',
 }

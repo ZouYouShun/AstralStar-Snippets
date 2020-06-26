@@ -24,7 +24,7 @@
     </ng-template>
   </div>
 
-  <!-- <h3 class="icon-cog m-3"></h3> -->
+  <h3 class="icon-cog m-3 cursor-pointer" (click)="goSettings()"></h3>
 </div>
 <main #main>
   <ul *ngIf="searchResult.length > 0" class="pb-3">
