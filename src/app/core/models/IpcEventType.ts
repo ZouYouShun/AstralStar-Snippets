@@ -3,5 +3,6 @@ export enum IpcEventType {
   APPLY = 'APPLY',
   APPLY_COPY = 'APPLY_COPY',
   HEIGHT = 'HEIGHT',
-  EXIT = 'EXIT'
+  EXIT = 'EXIT',
+  PREVIOUS_SNIPPET = 'PREVIOUS_SNIPPET',
 }

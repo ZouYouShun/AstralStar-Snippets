@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { SnippetModel } from '../models';
+import { SnippetModel, IpcEventType } from '../models';
 import { LocalStorageService } from 'src/app/shared/services';
 import { prefix } from '../utils';
+import { ElectronService } from './electron.service';
 
 const STORAGE_KEY = prefix(
   ['copyToKeyboard', 'applyTextDirectly', 'snippets'],
@@ -13,6 +14,8 @@ const STORAGE_KEY = prefix(
   providedIn: 'root',
 })
 export class SnippetsService {
+  previousSnippet: SnippetModel;
+
   get copyToKeyboard() {
     return this._copyToKeyboard;
   }
@@ -46,7 +49,16 @@ export class SnippetsService {
   private _applyTextDirectly =
     this._storage.getItem(STORAGE_KEY.applyTextDirectly) ?? true;
 
-  constructor(private _storage: LocalStorageService) {}
+  constructor(
+    private _storage: LocalStorageService,
+    private _electron: ElectronService
+  ) {
+    const latestSnippet = this.sendIpcSync(IpcEventType.PREVIOUS_SNIPPET);
+    console.log(latestSnippet);
+    this.previousSnippet = this.snippets.find(
+      (snippet) => snippet.value === latestSnippet
+    );
+  }
 
   new(): void {
     this.snippets.unshift({
@@ -57,5 +69,13 @@ export class SnippetsService {
 
   save(value: SnippetModel[]) {
     this.snippets = value;
+  }
+
+  sendIpc(snippet: string, value: any): void {
+    this._electron.ipcRenderer.send(snippet, value);
+  }
+
+  sendIpcSync(snippet: string, value?: any) {
+    return this._electron.ipcRenderer.sendSync(snippet, value);
   }
 }

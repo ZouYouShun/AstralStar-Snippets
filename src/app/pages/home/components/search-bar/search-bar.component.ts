@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 
 import {
-  ElectronService,
   getCursorPosition,
   IpcEventType,
   setCursor,
@@ -36,24 +35,22 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   selectIndex = 0;
 
   get previewSnippet(): SnippetModel {
-    return this.searchResult[this.selectIndex];
+    return (
+      this.searchResult[this.selectIndex] || this._snippets.previousSnippet
+    );
   }
 
   searchResult: SnippetModel[] = [];
 
-  constructor(
-    private _electron: ElectronService,
-    private _snippets: SnippetsService
-  ) {}
+  constructor(private _snippets: SnippetsService) {}
 
   ngOnInit(): void {
     window.addEventListener(
       'keydown',
       (e) => {
-        console.log('exit', e);
         switch (e.code) {
           case 'Escape':
-            this._sendIpc(IpcEventType.EXIT, true);
+            this._snippets.sendIpc(IpcEventType.EXIT, true);
             break;
           case 'ArrowRight':
             if (this.previewSnippet) {
@@ -116,7 +113,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   private _setCurrentHeight(): void {
     console.log(IpcEventType.HEIGHT);
     this.currentHeight = this.mainElm.nativeElement.clientHeight;
-    this._sendIpc(IpcEventType.HEIGHT, this.currentHeight);
+    this._snippets.sendIpc(IpcEventType.HEIGHT, this.currentHeight);
   }
 
   ngAfterViewInit(): void {
@@ -148,15 +145,11 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
         .filter((x) => !!x)
         .join('_') || IpcEventType.COPY;
 
-    this._sendIpc(message, snippet);
+    this._snippets.sendIpc(message, snippet);
   }
 
   hover(i: number): void {
     console.log(i);
     this.selectIndex = i;
-  }
-
-  private _sendIpc(snippet: string, value: any): void {
-    this._electron.ipcRenderer.send(snippet, value);
   }
 }
