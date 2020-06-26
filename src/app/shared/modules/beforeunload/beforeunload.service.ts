@@ -35,7 +35,6 @@ export class BeforeunloadService {
   }
 
   leaveCheck(message?: string) {
-    console.log(this.leaveCheckFn);
     const checkResult = Object.keys(this.leaveCheckFn).some((key) => {
       const result = this.leaveCheckFn[key]();
       if (typeof result === 'string') {

@@ -46,7 +46,6 @@ export class BeforeunloadDirective implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('!!!!!!d');
     this.service.removeLeaveCheck(this.eventId);
   }
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LeaveGuard } from 'src/app/shared';
 
+import { SettingAccountComponent } from './setting-account/setting-account.component';
 import { SettingSnippetsComponent } from './setting-snippets/setting-snippets.component';
 import { SettingsComponent } from './settings.component';
 
@@ -17,7 +18,12 @@ const routes: Routes = [
       },
       {
         path: 'account',
-        component: SettingSnippetsComponent,
+        component: SettingAccountComponent,
+      },
+      {
+        path: '',
+        redirectTo: 'account',
+        pathMatch: 'full',
       },
     ],
   },

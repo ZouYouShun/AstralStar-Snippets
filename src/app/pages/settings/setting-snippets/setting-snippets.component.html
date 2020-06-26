@@ -1,8 +1,6 @@
 <ng-container *ngIf="formChange$ | async"></ng-container>
 
-<header class="pb-2 pl-3 d-flex align-items-center">
-  <h3>Snippets</h3>
-  <i class="flex-fill"></i>
+<st-setting-header title="Snippets">
   <span
     *ngIf="!isEdit; else editControlElm"
     class="icon-cog mr-4 cursor-pointer"
@@ -13,7 +11,7 @@
     <span class="icon-checkmark mr-4 cursor-pointer" (click)="save()"></span>
     <span class="icon-cross mr-4 cursor-pointer" (click)="cancel()"></span>
   </ng-template>
-</header>
+</st-setting-header>
 
 <form
   [formGroup]="formGroup"
