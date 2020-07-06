@@ -5,11 +5,20 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Attach electron",
+      "port": 9229,
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
       "name": "Electron Main Renderer",
       "type": "node",
       "request": "launch",
       "protocol": "inspector",
-      "cwd": "${workspaceFolder}/dist/electron",
+      "cwd": "${workspaceFolder}",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
       "runtimeArgs": [
         "--serve",
@@ -18,7 +27,8 @@
       ],
       "windows": {
         "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
-      }
+      },
+      "restart": true
     },
     {
       "name": "Karma Attach Chrome",
