@@ -47,6 +47,7 @@ function createWindow(
 ): BrowserWindow {
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
+
   currentRoute = route;
 
   if (win) {
@@ -79,26 +80,25 @@ function createWindow(
       win = null;
     });
 
-    // if (serve) {
-    //   // win.webContents.openDevTools();
-    //   require('electron-reload')(rootUrl, {
-    //     electron: require(`${rootUrl}/node_modules/electron`),
-    //   });
-    // }
+    if (serve) {
+      // win.webContents.openDevTools();
+      require('electron-reload')(rootUrl, {
+        electron: require(`${rootUrl}/node_modules/electron`),
+      });
+    }
   }
-  win.loadURL(path.join('http://localhost:4200'));
 
-  // if (serve) {
-  //   win.loadURL(path.join('http://localhost:4200'));
-  // } else {
-  //   win.loadURL(
-  //     url.format({
-  //       pathname: path.join(__dirname, 'dist/index.html'),
-  //       protocol: 'file:',
-  //       slashes: true,
-  //     })
-  //   );
-  // }
+  if (serve) {
+    win.loadURL(path.join('http://localhost:4200'));
+  } else {
+    win.loadURL(
+      url.format({
+        pathname: path.join(__dirname, 'dist/index.html'),
+        protocol: 'file:',
+        slashes: true,
+      })
+    );
+  }
 
   const { x, y } = screen.getCursorScreenPoint();
   const currentDisplay = screen.getDisplayNearestPoint({ x, y });
