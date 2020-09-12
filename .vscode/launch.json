@@ -14,6 +14,13 @@
       "type": "node"
     },
     {
+			"type": "chrome",
+			"request": "attach",
+			"name": "Attach to Angular app",
+      "timeout": 30000,
+			"port": 9222,
+		},
+    {
       "name": "Electron Main Renderer",
       "type": "node",
       "request": "launch",
@@ -21,14 +28,14 @@
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
       "runtimeArgs": [
-        "--serve",
         ".",
+        "--enable-logging",
         "--remote-debugging-port=9222"
       ],
       "windows": {
         "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
       },
-      "preLaunchTask": "Run whold App",
+      "timeout": 30000,
       "restart": true
     },
     {

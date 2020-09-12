@@ -24,7 +24,8 @@
       "dependsOn": [
         "Run App",
         "Run electron App"
-      ]
+      ],
+      "problemMatcher": []
     }
   ]
 }
