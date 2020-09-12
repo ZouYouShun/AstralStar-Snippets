@@ -5,7 +5,7 @@ import { MainElectronApp } from './MainElectronApp';
 
 new MainElectronApp({
   loadUrl: url.format({
-    pathname: path.join(__dirname, 'dist/index.html'),
+    pathname: path.join(__dirname, 'snippets-tool/index.html'),
     protocol: 'file:',
     slashes: true,
   }),

@@ -1,6 +1,6 @@
-import * as path from 'path';
 import { MainElectronApp } from './MainElectronApp';
 
+// import * as path from 'path';
 // const rootUrl = path.join(process.cwd(), '/dist/electron');
 
 // require('electron-reload')(rootUrl, {
