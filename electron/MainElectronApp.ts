@@ -157,13 +157,15 @@ export class MainElectronApp {
     globalShortcut.register('CommandOrControl+shift+X', () => {
       this.createWindow();
     });
-    globalShortcut.register('CommandOrControl+shift+V', () => {
+    globalShortcut.register('CommandOrControl+shift+v', () => {
       setTimeout(() => {
-        robot.keyTap(
-          'v',
-          process.platform === 'darwin' ? 'command' : 'control'
-        );
-      }, 200);
+        // robot.keyTap(
+        //   'v',
+        //   process.platform === 'darwin' ? 'command' : 'control'
+        // );
+
+        robot.typeString(this.previousText);
+      }, 500);
     });
   }
 
