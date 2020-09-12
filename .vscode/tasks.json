@@ -1,27 +1,30 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-      {
-        "label": "Build.All",
-        "type": "shell",
-        "command": "npm run electron:serve-tsc && ng serve",
-        "isBackground": true,
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        },
-        "problemMatcher": {
-          "owner": "typescript",
-          "source": "ts",
-          "applyTo": "closedDocuments",
-          "fileLocation": ["relative", "${cwd}"],
-          "pattern": "$tsc",
-          "background": {
-            "activeOnStart": true,
-            "beginsPattern": "^.*",
-            "endsPattern": "^.*Compiled successfully.*"
-          }
-        }
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run App",
+      "type": "shell",
+      "command": "npm start",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}"
       }
-    ]
-  }
+    },
+    {
+      "label": "Run electron App",
+      "type": "shell",
+      "command": "npm run build:electron",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    },
+    {
+      "label": "Run whold App",
+      "dependsOn": [
+        "Run App",
+        "Run electron App"
+      ]
+    }
+  ]
+}

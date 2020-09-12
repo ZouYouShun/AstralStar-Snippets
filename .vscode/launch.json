@@ -28,6 +28,7 @@
       "windows": {
         "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
       },
+      "preLaunchTask": "Run whold App",
       "restart": true
     },
     {
