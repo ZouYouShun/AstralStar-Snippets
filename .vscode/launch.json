@@ -35,6 +35,7 @@
       "windows": {
         "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
       },
+      "sourceMaps": true,
       "timeout": 30000,
       "restart": true
     },

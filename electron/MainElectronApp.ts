@@ -41,17 +41,12 @@ export class MainElectronApp {
   createWindow(
     route = '',
     option: BrowserWindowConstructorOptions & { blurClose?: boolean } = {
-      blurClose: false,
+      blurClose: true,
     }
   ): BrowserWindow {
     const size = screen.getPrimaryDisplay().workAreaSize;
 
-    this.currentRoute = route;
-
-    if (this.win) {
-      this.win.setSize(size.width / 2, DEFAULT_HEIGHT);
-      this.win.show();
-    } else {
+    if (!this.win) {
       console.log('init window');
       this.win = new BrowserWindow({
         width: size.width / 2,
@@ -79,20 +74,38 @@ export class MainElectronApp {
       this.win.once('closed', () => {
         this.win = null;
       });
+
+      this.win.loadURL(this.option.loadUrl);
     }
 
-    this.win.loadURL(this.option.loadUrl);
+    // if (this.currentRoute === '' || route !== this.currentRoute) {
+    // }
+    this.currentRoute = route;
+
+    this.setWindowInCurrentDesktop();
+    this.win.show();
+
+    return this.win;
+  }
+
+  private setWindowInCurrentDesktop() {
+    this.win.setVisibleOnAllWorkspaces(true); // put the window on all screens
+    this.win.focus(); // focus the window up front on the active screen
+    this.win.setVisibleOnAllWorkspaces(false); // disable all screen behavior
 
     const { x, y } = screen.getCursorScreenPoint();
     const currentDisplay = screen.getDisplayNearestPoint({ x, y });
     this.win.setPosition(currentDisplay.workArea.x, currentDisplay.workArea.y);
     this.win.center();
-
-    return this.win;
   }
 
   hideWindow() {
     Menu.sendActionToFirstResponder('hide:');
+    // this.win.close();
+  }
+
+  closeWindow() {
+    this.win.close();
   }
 
   openSettingPage() {
@@ -103,7 +116,6 @@ export class MainElectronApp {
     this.createWindow('settings', {
       height: 600,
       frame: true,
-      alwaysOnTop: false,
       transparent: false,
       resizable: true,
       blurClose: false,
@@ -133,7 +145,7 @@ export class MainElectronApp {
     const dockMenu = Menu.buildFromTemplate([
       {
         label: 'Settings',
-        click() {
+        click: () => {
           this.openSettingPage();
         },
       },
