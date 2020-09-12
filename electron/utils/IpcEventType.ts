@@ -1,0 +1,10 @@
+export const enum IpcEventType {
+  COPY = 'COPY',
+  APPLY = 'APPLY',
+  APPLY_COPY = 'APPLY_COPY',
+  HEIGHT = 'HEIGHT',
+  EXIT = 'EXIT',
+  PREVIOUS_SNIPPET = 'PREVIOUS_SNIPPET',
+  GO_SETTINGS = 'GO_SETTINGS',
+  INIT_ROUTE = 'INIT_ROUTE'
+}
