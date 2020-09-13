@@ -17,8 +17,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start:electron": "electron . --remote-debugging-port=9222",
-    "electron:build": "cd build && npm install && electron-packager .",
-    "release":"npm run build:release && npm run electron:build",
+    "mac-icon-create": "cd assets && iconutil -c icns ./icon.iconset",
+    "electron:build": "cd build && npm install && electron-packager . AstralSnippets --arch=x64 --icon=../assets/icon.icns --overwrite",
+    "release": "npm run build:release && npm run electron:build",
     "rebuild": "npm rebuild --runtime=electron --target=9.0.5 --disturl=https://atom.io/download/atom-shell --abi=79"
   },
   "main": "dist/electron/main.dev.js",
