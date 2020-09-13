@@ -1,4 +1,4 @@
-# package electron
+# Package electron
 
 1. npm run build:release
 2. npm run electron:build
@@ -21,4 +21,9 @@
     └── icon_512x512@2x.png
 ```
 
-other resource: https://icoconvert.com/
+# Other resource:
+
+https://icoconvert.com/
+
+https://medium.com/how-to-electron/a-complete-guide-to-packaging-your-electron-app-1bdc717d739f
+https://codertw.com/ios/22514/
